@@ -18,7 +18,7 @@
 
 html, body
 {
-	background: #ccc;
+	background: #fff;
 }
 
 /*--------------- TEMP*/
@@ -88,26 +88,31 @@ html, body
 
 .startScreen_cont_entrance .startScreen_deco_tr
 {
-	right: 40px;
-	top: 40px;
+	left: 0; right: 0; top: 0; bottom: 0;
+
+	margin: 40px 40px auto auto;
 
 	background-position: 0 -320px;
 }
 
 .startScreen_cont_entrance .startScreen_deco_bl
 {
-	left: 40px;
-	bottom: 40px;
+	left: 0; right: 0; top: 0; bottom: 0;
+
+	margin: auto auto 40px 40px;
 
 	background-position: -40px -320px;
 }
 
 .startScreen_cont_entrance .startScreen_tl
 {
+	width: 40%;
+
 	position: absolute;
 
-	left: 40px;
-	top: 40px;
+	left: 0; right: 0; top: 0; bottom: 0;
+
+	margin: 40px auto auto 40px;
 }
 
 .startScreen_cont_entrance .startScreen_tl p
@@ -163,8 +168,10 @@ html, body
 {
 	position: absolute;
 
-	right: 40px;
-	bottom: 40px;
+	right: 0; bottom: 0;
+
+	margin: 0 40px 40px 0;
+
 }
 
 .startScreen_cont_entrance .startScreen_br .startScreen_soundOption
@@ -177,7 +184,7 @@ html, body
 
 	display: inline;
 
-	right: 0;
+	margin: auto 0 0 auto;
 
 	position: relative;
 
@@ -289,4 +296,49 @@ html, body
 	}
 
 /*--------------- RECYCLED*/
+
+/*--------------- RESPONSIVE*/
+
+
+@media screen and (max-width:700px)
+{
+	.startScreen_cont_entrance .startScreen_br
+	{
+		width: 50%;
+
+		left: 0; bottom: 0;
+
+		margin: 0 0 40px 40px;
+	}
+
+	.startScreen_cont_entrance .startScreen_deco_bl
+	{
+		margin: auto 40px 40px auto;
+	}
+
+	.startScreen_cont_entrance .startScreen_br .startScreen_soundOption
+	{
+		font-size: 5em;
+	}
+}
+
+@media screen and (max-width:500px)
+{
+	.startScreen_cont_entrance .startScreen_tl
+	{
+		width: 70%;
+	}
+
+	.startScreen_cont_entrance .startScreen_deco_tr, .startScreen_cont_entrance .startScreen_deco_bl
+	{
+		visibility: hidden;
+	}
+
+	.startScreen_cont_entrance .startScreen_br .startScreen_soundOption
+	{
+		font-size: 4em;
+	}
+}
+
+/*--------------- RESPONSIVE*/
 
