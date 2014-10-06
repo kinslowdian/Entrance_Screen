@@ -1,31 +1,6 @@
 @charset "UTF-8";
-@import url(http://fonts.googleapis.com/css?family=Dosis);
 
-/*--------------- TEMP*/
-*
-{
-	padding: 0;
-	margin: 0;
-	outline: none;
-	border: none;
-
-	-webkit-user-select: none;
-	user-select: none;
-
-	-webkit-touch-callout: none;
-	touch-callout: none;
-}
-
-html, body
-{
-	background: #fff;
-}
-
-/*--------------- TEMP*/
-
-
-
-.startScreen_wrapper
+.multiUseInfo_wrapper
 {
 	width: 100%;
 	height: 100%;
@@ -37,7 +12,7 @@ html, body
 	margin: auto;
 }
 
-.startScreen_cont_entrance, .startScreen_cont_main
+.multiUseInfo_cont_entrance, .multiUseInfo_cont_main
 {
 	width: inherit;
 	height: inherit;
@@ -51,7 +26,7 @@ html, body
 	margin: auto;
 }
 
-.startScreen_cont_hide
+.multiUseInfo_cont_hide
 {
 	opacity: 0;
 
@@ -59,7 +34,7 @@ html, body
 	transform: translateY(-100%);
 }
 
-.startScreen_cont_show
+.multiUseInfo_cont_show
 {
 	opacity: 1;
 
@@ -67,18 +42,18 @@ html, body
 	transform: translateY(0%);
 }
 
-.tween-startScreen_cont
+.tween-multiUseInfo_cont
 {
 	-webkit-transition: 600ms ease-in-out;
 	transition: 600ms ease-in-out;
 }
 
-.startScreen_cont_entrance
+.multiUseInfo_cont_entrance
 {
 	background: #20202a;
 }
 
-.startScreen_cont_entrance .startScreen_deco_tr, .startScreen_cont_entrance .startScreen_deco_bl
+.multiUseInfo_cont_entrance .multiUseInfo_deco_tr, .multiUseInfo_cont_entrance .multiUseInfo_deco_bl
 {
 	width: 40px;
 	height: 40px;
@@ -86,7 +61,7 @@ html, body
 	position: absolute;
 }
 
-.startScreen_cont_entrance .startScreen_deco_tr
+.multiUseInfo_cont_entrance .multiUseInfo_deco_tr
 {
 	left: 0; right: 0; top: 0; bottom: 0;
 
@@ -95,7 +70,7 @@ html, body
 	background-position: 0 -320px;
 }
 
-.startScreen_cont_entrance .startScreen_deco_bl
+.multiUseInfo_cont_entrance .multiUseInfo_deco_bl
 {
 	left: 0; right: 0; top: 0; bottom: 0;
 
@@ -104,7 +79,7 @@ html, body
 	background-position: -40px -320px;
 }
 
-.startScreen_cont_entrance .startScreen_tl
+.multiUseInfo_cont_entrance .multiUseInfo_tl
 {
 	width: 40%;
 
@@ -115,7 +90,7 @@ html, body
 	margin: 40px auto auto 40px;
 }
 
-.startScreen_cont_entrance .startScreen_tl p
+.multiUseInfo_cont_entrance .multiUseInfo_tl p
 {
 	font-size: 1em;
 	letter-spacing: 0.1em;
@@ -124,18 +99,18 @@ html, body
 	text-transform: uppercase;
 }
 
-.startScreen_cont_entrance .startScreen_tl p:first-of-type
+.multiUseInfo_cont_entrance .multiUseInfo_tl p:first-of-type
 {
 	color: #ffff66;
 	margin-bottom: 3em;
 }
 
-.startScreen_cont_entrance .startScreen_tl p:last-of-type
+.multiUseInfo_cont_entrance .multiUseInfo_tl p:last-of-type
 {
 	color: #fff;
 }
 
-.startScreen_tl_show
+.multiUseInfo_tl_show
 {
 	opacity: 1;
 
@@ -143,7 +118,7 @@ html, body
 	transform: translateY(0px);
 }
 
-.startScreen_tl_hide
+.multiUseInfo_tl_hide
 {
 	opacity: 0;
 
@@ -151,20 +126,20 @@ html, body
 	transform: translateY(10px);
 }
 
-.tween-startScreen_cont_entrance_tl
+.tween-multiUseInfo_cont_entrance_tl
 {
 	-webkit-transition: 400ms ease-in-out;
 	transition: 400ms ease-in-out;
 }
 
-.startScreen_tl_delay
+.tween-multiUseInfo_cont_entrance_tl_delay
 {
 	-webkit-transition-delay: 200ms;
 	transition-delay: 200ms;
 }
 
 
-.startScreen_cont_entrance .startScreen_br
+.multiUseInfo_cont_entrance .multiUseInfo_br
 {
 	position: absolute;
 
@@ -174,7 +149,20 @@ html, body
 
 }
 
-.startScreen_cont_entrance .startScreen_br .startScreen_soundOption
+
+.multiUseInfo_option_disabled
+{
+	cursor: default;
+	pointer-events: none;
+}
+
+
+.multiUseInfo_sound
+{
+
+}
+
+.multiUseInfo_sound .multiUseInfo_br .multiUseInfo_sound_option
 {
 	font-size: 6em;
 	letter-spacing: 0.1em;
@@ -191,32 +179,44 @@ html, body
 	cursor: pointer
 }
 
-.startScreen_cont_entrance .startScreen_br p:first-of-type
+.multiUseInfo_sound .multiUseInfo_br p:first-of-type
 {
 	margin-right: 0.4em;
 }
 
-.startScreen_cont_entrance .startScreen_soundOption_false
+.multiUseInfo_sound .multiUseInfo_sound_option_false
 {
 	color: #17e69d;
 }
 
-.startScreen_cont_entrance .startScreen_soundOption_true
+.multiUseInfo_sound .multiUseInfo_sound_option_true
 {
 	color: #ff0070;
 }
 
-.startScreen_cont_entrance .startScreen_soundOption_true:hover
+.tween-multiUseInfo_sound_option
+{
+	-webkit-transition: 400ms ease-in-out;
+	transition: 400ms ease-in-out;
+}
+
+.tween-multiUseInfo_sound_option_delay
+{
+	-webkit-transition-delay: 200ms;
+	transition-delay: 200ms;
+}
+
+.multiUseInfo_sound .multiUseInfo_sound_option_true:hover
 {
 	color: #fff;
 }
 
-.startScreen_cont_entrance .startScreen_soundOption_false:hover
+.multiUseInfo_sound .multiUseInfo_sound_option_false:hover
 {
 	color: #ffff66;
 }
 
-.startScreen_soundOption_hide
+.multiUseInfo_sound_option_hide
 {
 	opacity: 0;
 
@@ -224,7 +224,7 @@ html, body
 	transform: translateY(20px);
 }
 
-.startScreen_soundOption_show
+.multiUseInfo_sound_option_show
 {
 	opacity: 1;
 
@@ -232,77 +232,78 @@ html, body
 	transform: translateY(0px);
 }
 
-.tween-startScreen_cont_entrance_br
+
+.multiUseInfo_fail
 {
-	-webkit-transition: 400ms ease-in-out;
-	transition: 400ms ease-in-out;
+
 }
 
-.startScreen_br_delay
+.multiUseInfo_fail .multiUseInfo_br
 {
-	-webkit-transition-delay: 200ms;
-	transition-delay: 200ms;
+	width: 80px;
+	height: 160px;
 }
 
-
-.startScreen_optionDisabled
+.multiUseInfo_fail .multiUseInfo_fail_portal, .multiUseInfo_fail .multiUseInfo_fail_character
 {
-	cursor: default;
-	pointer-events: none;
+	width: 80px;
+	height: 80px;
+
+	position: absolute;
+
+	left: 0;
 }
 
+.multiUseInfo_fail .multiUseInfo_fail_portal
+{
+	bottom: 0;
 
+	z-index: 0;
+}
 
-/*--------------- RECYCLED*/
+.multiUseInfo_fail .multiUseInfo_fail_character
+{
+	top: 0;
 
-	.font-dosis
-	{
-		font-family: 'Dosis', sans-serif;
+	z-index: 1;
+}
 
-		font-weight: lighter;
-		font-variant: normal;
-		font-style: normal;
+.multiUseInfo_fail .enemy_zombie
+{
+	left: 0; right: 0; top: 0; bottom: 0;
 
-		-webkit-font-smoothing	: antialiased;
-		font-smoothing			: antialiased;
-	}
+	margin: auto;
+}
 
+.multiUseInfo_fail_character_hide
+{
+	opacity: 0;
 
+	-webkit-transform: translateY(80px);
+	transform: translateY(80px);
+}
 
-/*PIXELS*/
+.multiUseInfo_fail_character_show
+{
+	opacity: 1;
 
-		.pixels_portalZombie
-	{
-		background-image: url(../_img/portalZombieSprite_1x.png);
-		background-repeat: no-repeat;
-		background-position: left top;
-		background-size: 80px 360px;
-	}
+	-webkit-transform: translateY(0px);
+	transform: translateY(0px);
+}
 
-	@media all and (-webkit-min-device-pixel-ratio: 1), all and (min-device-pixel-ratio: 1)
-	{
-		.pixels_portalZombie
-		{
-			background-image: url(../_img/portalZombieSprite_1x.png);
-		}
-	}
+.tween-multiUseInfo_fail_character
+{
+	-webkit-transition: 800ms ease-out;
+	transition: 800ms ease-out;
+}
 
-	@media all and (-webkit-min-device-pixel-ratio: 2), all and (min-device-pixel-ratio: 2)
-	{
-		.pixels_portalZombie
-		{
-			background-image: url(../_img/portalZombieSprite_2x.png);
-		}
-	}
-
-/*--------------- RECYCLED*/
 
 /*--------------- RESPONSIVE*/
 
 
 @media screen and (max-width:700px)
 {
-	.startScreen_cont_entrance .startScreen_br
+	.multiUseInfo_cont_entrance .multiUseInfo_br
 	{
 		width: 50%;
 
@@ -311,12 +312,12 @@ html, body
 		margin: 0 0 40px 40px;
 	}
 
-	.startScreen_cont_entrance .startScreen_deco_bl
+	.multiUseInfo_cont_entrance .multiUseInfo_deco_bl
 	{
 		margin: auto 40px 40px auto;
 	}
 
-	.startScreen_cont_entrance .startScreen_br .startScreen_soundOption
+	.multiUseInfo_sound .multiUseInfo_br .multiUseInfo_sound_option
 	{
 		font-size: 5em;
 	}
@@ -324,17 +325,17 @@ html, body
 
 @media screen and (max-width:500px)
 {
-	.startScreen_cont_entrance .startScreen_tl
+	.multiUseInfo_cont_entrance .multiUseInfo_tl
 	{
 		width: 70%;
 	}
 
-	.startScreen_cont_entrance .startScreen_deco_tr, .startScreen_cont_entrance .startScreen_deco_bl
+	.multiUseInfo_cont_entrance .multiUseInfo_deco_tr, .multiUseInfo_cont_entrance .multiUseInfo_deco_bl
 	{
 		visibility: hidden;
 	}
 
-	.startScreen_cont_entrance .startScreen_br .startScreen_soundOption
+	.multiUseInfo_sound .multiUseInfo_br .multiUseInfo_sound_option
 	{
 		font-size: 4em;
 	}

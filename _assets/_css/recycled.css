@@ -1,0 +1,909 @@
+@charset "UTF-8";
+
+/*--------------- RECYCLED*/
+
+	.font-dosis
+	{
+		font-family: 'Dosis', sans-serif;
+
+		font-weight: lighter;
+		font-variant: normal;
+		font-style: normal;
+
+		-webkit-font-smoothing	: antialiased;
+		font-smoothing			: antialiased;
+	}
+
+
+
+/*PIXELS*/
+
+		.pixels_portalZombie
+	{
+		background-image: url(../_img/portalZombieSprite_1x.png);
+		background-repeat: no-repeat;
+		background-position: left top;
+		background-size: 80px 360px;
+	}
+
+	.pixels_map_enemy40x40
+	{
+		background-image: url(../_img/map_enemySprite40x40_1x.png);
+		background-repeat: no-repeat;
+		/* background-size: 320px 240px; */
+		background-size: 320px 360px;
+	}
+
+	@media all and (-webkit-min-device-pixel-ratio: 1), all and (min-device-pixel-ratio: 1)
+	{
+		.pixels_portalZombie
+		{
+			background-image: url(../_img/portalZombieSprite_1x.png);
+		}
+
+		.pixels_map_enemy40x40
+		{
+			background-image: url(../_img/map_enemySprite40x40_1x.png);
+		}
+	}
+
+	@media all and (-webkit-min-device-pixel-ratio: 2), all and (min-device-pixel-ratio: 2)
+	{
+		.pixels_portalZombie
+		{
+			background-image: url(../_img/portalZombieSprite_2x.png);
+		}
+
+		.pixels_map_enemy40x40
+		{
+			background-image: url(../_img/map_enemySprite40x40_2x.png);
+		}
+	}
+
+/*--------------- RECYCLED*/
+
+
+/* ----------------------------------------------------------------------- PLAYER */
+
+	#player-block, #preHitTest
+	{
+		width: 40px;
+		height: 40px;
+
+		position: absolute;
+
+		z-index: 1;
+
+		-webkit-transform	: translate(0px, 0px);
+		transform			: translate(0px, 0px);
+	}
+
+	.tween-player-block
+	{
+		-webkit-transition	: -webkit-transform 0.18s ease-in-out; /* QUICK- 0.24s */
+		transition			: transform 0.18s ease-in-out; /* QUICK- 0.24s */
+	}
+
+	.mapPlayer_head_default
+	{
+		background-position: 0 0;
+	}
+
+	.mapPlayer_head_happy
+	{
+		background-position: -40px 0;
+	}
+
+	.mapPlayer_head_dead
+	{
+		background-position: -80px 0;
+	}
+
+	.mapPlayer_head_fear
+	{
+		background-position: -120px 0;
+	}
+
+
+	#player-block .map-goat
+	{
+		width: inherit;
+		height: inherit;
+
+		opacity: 0;
+
+		-webkit-transition	: opacity 0.2s linear;
+		transition			: opacity 0.2s linear;
+	}
+
+	.player-sprite
+	{
+		width: inherit;
+		height: inherit;
+	}
+
+	.player-sprite .map-goat-head
+	{
+		width: inherit;
+		height: inherit;
+
+		position: absolute;
+
+		z-index: 2;
+	}
+
+	.player-sprite .map-goat-hand-L
+	{
+		width: inherit;
+		height: inherit;
+
+		background-position: 0px -40px;
+
+		position: absolute;
+
+		z-index: 3;
+	}
+
+	.player-sprite .map-goat-hand-R
+	{
+		width: inherit;
+		height: inherit;
+
+		background-position: -40px -40px;
+
+		position: absolute;
+
+		z-index: 3;
+	}
+
+	.player-sprite .map-goat-body
+	{
+		width: inherit;
+		height: inherit;
+
+		background-position: -160px 0px;
+
+		position: absolute;
+
+		z-index: 1;
+	}
+
+	.player-sprite .map-goat-legs
+	{
+		width: inherit;
+		height: inherit;
+
+		background-position: 0 -80px;
+
+		position: absolute;
+
+		z-index: 0;
+	}
+
+
+	.tween-map-goat-head
+	{
+		-webkit-animation	: tweenMapGoatHeadFrames 0.4s ease-in-out infinite;
+		animation			: tweenMapGoatHeadFrames 0.4s ease-in-out infinite;
+	}
+
+	@-webkit-keyframes tweenMapGoatHeadFrames
+	{
+		0%		{-webkit-transform: translateY(0px);}
+		50%		{-webkit-transform: translateY(-2px);}
+		100%	{-webkit-transform: translateY(0px);}
+	}
+
+	@keyframes tweenMapGoatHeadFrames
+	{
+		0%		{transform: translateY(0px);}
+		50%		{transform: translateY(-2px);}
+		100%	{transform: translateY(0px);}
+	}
+
+	.tween-map-goat-hand-L
+	{
+		-webkit-animation	: tweenMapGoatHandL_Frames 0.6s linear infinite;
+		animation			: tweenMapGoatHandL_Frames 0.6s linear infinite;
+	}
+
+	@-webkit-keyframes tweenMapGoatHandL_Frames
+	{
+		0%		{-webkit-transform: translateY(0px);}
+		50%		{-webkit-transform: translateY(-2px);}
+		100%	{-webkit-transform: translateY(0px);}
+	}
+
+	@keyframes tweenMapGoatHandL_Frames
+	{
+		0%		{transform: translateY(0px);}
+		50%		{transform: translateY(-2px);}
+		100%	{transform: translateY(0px);}
+	}
+
+	.tween-map-goat-hand-R
+	{
+		-webkit-animation	: tweenMapGoatHandR_Frames 0.6s linear infinite;
+		animation			: tweenMapGoatHandR_Frames 0.6s linear infinite;
+	}
+
+	@-webkit-keyframes tweenMapGoatHandR_Frames
+	{
+		0%		{-webkit-transform: translateY(-2px);}
+		50%		{-webkit-transform: translateY(0px);}
+		100%	{-webkit-transform: translateY(-2px);}
+	}
+
+	@keyframes tweenMapGoatHandR_Frames
+	{
+		0%		{transform: translateX(-2px);}
+		50%		{transform: translateX(0px);}
+		100%	{transform: translateX(-2px);}
+	}
+
+	.tween-mapPlayerWalk_loop
+	{
+		-webkit-animation	: tweenMapPlayerWalkLoopFrames 0.09s steps(8) 0 infinite; /* QUICK- 0.12s */
+		animation			: tweenMapPlayerWalkLoopFrames 0.09s steps(8) 0 infinite; /* QUICK- 0.12s */
+	}
+
+	.tween-mapPlayerWalk_stop
+	{
+		background-position: 0 -80px;
+	}
+
+	@-webkit-keyframes tweenMapPlayerWalkLoopFrames
+	{
+		from	{background-position: 0 -80px;}
+		to		{background-position: -320px -80px;}
+	}
+
+	@keyframes tweenMapPlayerWalkLoopFrames
+	{
+		from	{background-position: 0 -80px;}
+		to		{background-position: -320px -80px;}
+	}
+
+	.tween-player-walkX
+	{
+		-webkit-animation	: tweenPlayerWalkX_Frames 0.18s linear infinite; /* QUICK- 0.24s */ /* 0.6s */
+		animation			: tweenPlayerWalkX_Frames 0.18s linear infinite; /* QUICK- 0.24s */ /* 0.6s */
+	}
+
+	@-webkit-keyframes tweenPlayerWalkX_Frames
+	{
+		0%		{-webkit-transform: translateX(0px);}
+		25%		{-webkit-transform: translateX(-2px);}
+		50% 	{-webkit-transform: translateX(0px);}
+		75%		{-webkit-transform: translateX(2px);}
+		100% 	{-webkit-transform: translateX(0px);}
+	}
+
+	@keyframes tweenPlayerWalkX_Frames
+	{
+		0%		{transform: translateX(0px);}
+		25%		{transform: translateX(-2px);}
+		50% 	{transform: translateX(0px);}
+		75%		{transform: translateX(2px);}
+		100% 	{transform: translateX(0px);}
+	}
+
+	.tween-player-walkY
+	{
+		-webkit-animation	: tweenPlayerWalkY_Frames 0.18s linear infinite; /* QUICK- 0.24s */ /* 0.6s */
+		animation			: tweenPlayerWalkY_Frames 0.18s linear infinite; /* QUICK- 0.24s */ /* 0.6s */
+	}
+
+	@-webkit-keyframes tweenPlayerWalkY_Frames
+	{
+		0%		{-webkit-transform: translateY(0px);}
+		25%		{-webkit-transform: translateY(-2px);}
+		50% 	{-webkit-transform: translateY(0px);}
+		75%		{-webkit-transform: translateY(2px);}
+		100% 	{-webkit-transform: translateY(0px);}
+	}
+
+	@keyframes tweenPlayerWalkY_Frames
+	{
+		0%		{transform: translateY(0px);}
+		25%		{transform: translateY(-2px);}
+		50% 	{transform: translateY(0px);}
+		75%		{transform: translateY(2px);}
+		100% 	{transform: translateY(0px);}
+	}
+
+	.actionCloud
+	{
+		width: 40px;
+		height: 40px;
+
+		position: absolute;
+
+		z-index: 4;
+	}
+
+	.tween-actionCloud
+	{
+		-webkit-transition: opacity 0.2s linear;
+		transition: opacity 0.2s linear;
+	}
+
+	.actionCloudMain
+	{
+		width: 120px;
+		height: 120px;
+
+		visibility: hidden;
+
+		position: absolute;
+
+		-webkit-transform: translate(-40px, -40px);
+		transform: translate(-40px, -40px);
+	}
+
+	.actionCloudMain-0
+	{
+		z-index: 1;
+	}
+
+	.actionCloudMain-1
+	{
+		z-index: 0;
+	}
+
+	.actionCloudSprite-outer
+	{
+		width: inherit;
+		height: inherit;
+
+		visibility: hidden;
+
+		-webkit-transform-origin: 50% 50%;
+		transform-origin: 50% 50%;
+
+		opacity: 0;
+
+		-webkit-transform: scale(0);
+		transform: scale(0);
+	}
+
+	.actionCloudSprite-inner
+	{
+		width: inherit;
+		height: inherit;
+
+		visibility: hidden;
+
+		-webkit-transform-origin: 50% 50%;
+		transform-origin: 50% 50%;
+	}
+
+	.tween-actionCloudSpriteOuter
+	{
+		visibility: visible;
+
+		-webkit-animation: tweenActionCloudSpriteOuterFrames 0.3s ease-in-out forwards;
+		animation: tweenActionCloudSpriteOuterFrames 0.3s ease-in-out forwards;
+	}
+
+	@-webkit-keyframes tweenActionCloudSpriteOuterFrames
+	{
+		0%		{-webkit-transform: scale(0); opacity: 0;}
+		50%		{-webkit-transform: scale(4); opacity: 1;}
+		100%	{-webkit-transform: scale(1); opacity: 1;}
+	}
+
+	@keyframes tweenActionCloudSpriteOuterFrames
+	{
+		0%		{transform: scale(0); opacity: 0;}
+		50%		{transform: scale(4); opacity: 1;}
+		100%	{transform: scale(1); opacity: 1;}
+	}
+
+	.tween-actionCloudSpriteOuterAlt
+	{
+		visibility: visible;
+
+		-webkit-animation: tweenActionCloudSpriteOuterAltFrames 0.6s ease-in-out forwards;
+		animation: tweenActionCloudSpriteOuterAltFrames 0.6s ease-in-out forwards;
+	}
+
+	@-webkit-keyframes tweenActionCloudSpriteOuterAltFrames
+	{
+		0%		{-webkit-transform: scale(0) rotate(0deg); opacity: 0;}
+		50%		{-webkit-transform: scale(8) rotate(180deg); opacity: 1;}
+		100%	{-webkit-transform: scale(0) rotate(360deg); opacity: 0;}
+	}
+
+	@keyframes tweenActionCloudSpriteOuterAltFrames
+	{
+		0%		{transform: scale(0) rotate(0deg); opacity: 0;}
+		50%		{transform: scale(8) rotate(180deg); opacity: 1;}
+		100%	{transform: scale(0) rotate(360deg); opacity: 0;}
+	}
+
+	.tween-actionCloudSpriteInner
+	{
+		visibility: visible;
+
+		-webkit-animation: tweenActionCloudSpriteInnerFrames 0.2s ease-in-out infinite;
+		animation: tweenActionCloudSpriteInnerFrames 0.2s ease-in-out inherit;
+	}
+
+	@-webkit-keyframes tweenActionCloudSpriteInnerFrames
+	{
+		0%		{-webkit-transform: scale(0.8);}
+		50%		{-webkit-transform: scale(1);}
+		100%	{-webkit-transform: scale(0.8);}
+	}
+
+	@keyframes tweenActionCloudSpriteInnerFrames
+	{
+		0%		{transform: scale(0.8);}
+		50%		{transform: scale(1);}
+		100%	{transform: scale(0.8);}
+	}
+
+	.actionCloud-color
+	{
+		background-position: 0 0;
+	}
+
+	.actionCloud-white
+	{
+		background-position: -120px 0;
+	}
+
+	.tween-fieldSmash
+	{
+		-webkit-transform-origin: 50% 50%;
+		transform-origin: 50% 50%;
+
+		-webkit-animation: tweenFieldSmashFrames 0.2s linear forwards;
+		animation: tweenFieldSmashFrames 0.2s linear forwards;
+	}
+
+	@-webkit-keyframes tweenFieldSmashFrames
+	{
+		0%		{-webkit-transform: translateX(0px) rotate(0deg);}
+		25%		{-webkit-transform: translateX(-40px) rotate(-6deg);}
+		50%		{-webkit-transform: translateX(0px) rotate(0deg);}
+		75%		{-webkit-transform: translateX(40px) rotate(6deg);}
+		100%	{-webkit-transform: translateX(0px) rotate(0deg);}
+	}
+
+	@keyframes tweenFieldSmashFrames
+	{
+		0%		{transform: translateX(0px) rotate(0deg);}
+		25%		{transform: translateX(-40px) rotate(-6deg);}
+		50%		{transform: translateX(0px) rotate(0deg);}
+		75%		{transform: translateX(40px) rotate(6deg);}
+		100%	{transform: translateX(0px) rotate(0deg);}
+	}
+
+/* ----------------------------------------------------------------------- PLAYER */
+
+
+/* ----------------------------------------------------------------------- ENEMY */
+
+	.map-enemy_40x40
+	{
+		width: 40px;
+		height: 40px;
+
+		position: absolute;
+
+		z-index: 1;
+	}
+
+	.map-enemy
+	{
+		width: inherit;
+		height: inherit;
+	}
+
+
+	.enemy-sprite
+	{
+		width: inherit;
+		height: inherit;
+	}
+
+
+	.enemy-sprite .map-enemy_40x40-head
+	{
+		width: inherit;
+		height: inherit;
+
+		position: absolute;
+
+		/* background-position: 0px 0px; */
+
+		z-index: 2;
+	}
+
+	.enemy-sprite .map-enemy_40x40-hand-L
+	{
+		width: inherit;
+		height: inherit;
+
+		background-position: 0px -40px;
+
+		position: absolute;
+
+		z-index: 3;
+	}
+
+	.enemy-sprite .map-enemy_40x40-hand-R
+	{
+		width: inherit;
+		height: inherit;
+
+		background-position: -40px -40px;
+
+		position: absolute;
+
+		z-index: 3;
+	}
+
+	.enemy-sprite .map-enemy_40x40-body
+	{
+		width: inherit;
+		height: inherit;
+
+		background-position: -160px 0px;
+
+		position: absolute;
+
+		z-index: 1;
+	}
+
+	.enemy-sprite .map-enemy_40x40-legs
+	{
+		width: inherit;
+		height: inherit;
+
+		background-position: 0 -80px;
+
+		position: absolute;
+
+		z-index: 0;
+	}
+
+	.tween-map-enemy_40x40-head
+	{
+		-webkit-animation	: tweenMapEnemy40x40HeadFrames 0.4s ease-in-out infinite;
+		animation			: tweenMapEnemy40x40HeadFrames 0.4s ease-in-out infinite;
+	}
+
+	@-webkit-keyframes tweenMapEnemy40x40HeadFrames
+	{
+		0%		{-webkit-transform: translateY(0px);}
+		50%		{-webkit-transform: translateY(-2px);}
+		100%	{-webkit-transform: translateY(0px);}
+	}
+
+	@keyframes tweenMapEnemy40x40HeadFrames
+	{
+		0%		{transform: translateY(0px);}
+		50%		{transform: translateY(-2px);}
+		100%	{transform: translateY(0px);}
+	}
+
+	.tween-map-enemy_40x40-hand-L
+	{
+		-webkit-animation	: tweenMapEnemy40x40HandL_Frames 0.6s linear infinite;
+		animation			: tweenMapEnemy40x40HandL_Frames 0.6s linear infinite;
+	}
+
+	@-webkit-keyframes tweenMapEnemy40x40HandL_Frames
+	{
+		0%		{-webkit-transform: translateY(0px);}
+		50%		{-webkit-transform: translateY(-2px);}
+		100%	{-webkit-transform: translateY(0px);}
+	}
+
+	@keyframes tweenMapEnemy40x40HandL_Frames
+	{
+		0%		{transform: translateY(0px);}
+		50%		{transform: translateY(-2px);}
+		100%	{transform: translateY(0px);}
+	}
+
+	.tween-map-enemy_40x40-hand-R
+	{
+		-webkit-animation	: tweenMapEnemy40x40HandR_Frames 0.6s linear infinite;
+		animation			: tweenMapEnemy40x40HandR_Frames 0.6s linear infinite;
+	}
+
+	@-webkit-keyframes tweenMapEnemy40x40HandR_Frames
+	{
+		0%		{-webkit-transform: translateY(-2px);}
+		50%		{-webkit-transform: translateY(0px);}
+		100%	{-webkit-transform: translateY(-2px);}
+	}
+
+	@keyframes tweenMapEnemy40x40HandR_Frames
+	{
+		0%		{transform: translateX(-2px);}
+		50%		{transform: translateX(0px);}
+		100%	{transform: translateX(-2px);}
+	}
+
+	.tween-map-enemy_40x40_loop
+	{
+		-webkit-animation	: tweenMapEnemy40x40WalkLoopFrames 0.12s steps(8) 0 infinite;
+		animation			: tweenMapEnemy40x40WalkLoopFrames 0.12s steps(8) 0 infinite;
+	}
+
+	.tween-map-enemy_40x40_stop
+	{
+		background-position: 0 -80px;
+	}
+
+	@-webkit-keyframes tweenMapEnemy40x40WalkLoopFrames
+	{
+		from	{background-position: 0 -80px;}
+		to		{background-position: -320px -80px;}
+	}
+
+	@keyframes tweenMapEnemy40x40WalkLoopFrames
+	{
+		from	{background-position: 0 -80px;}
+		to		{background-position: -320px -80px;}
+	}
+
+
+	/* DISPLAY PIXELS */
+
+	.enemy_rabbit .map-enemy_40x40-head
+	{
+		background-position-y: 0;
+	}
+
+	.enemy_rabbit .map-enemy_40x40-hand-L
+	{
+		background-position-y: -40px;
+	}
+
+	.enemy_rabbit .map-enemy_40x40-hand-R
+	{
+		background-position-y: -40px;
+	}
+
+	.enemy_rabbit .map-enemy_40x40-body
+	{
+		background-position-y: 0;
+	}
+
+	.enemy_rabbit .map-enemy_40x40-legs
+	{
+		background-position-y: -80px;
+	}
+
+
+	.enemy_crow .enemy-sprite .map-enemy_40x40-head
+	{
+		background-position-y: -120px;
+	}
+
+	.enemy_crow .enemy-sprite .map-enemy_40x40-hand-L
+	{
+		background-position-y: -160px;
+	}
+
+	.enemy_crow .enemy-sprite .map-enemy_40x40-hand-R
+	{
+		background-position-y: -160px;
+	}
+
+	.enemy_crow .enemy-sprite .map-enemy_40x40-body
+	{
+		background-position-y: -120px;
+	}
+
+	.enemy_crow .enemy-sprite .map-enemy_40x40-legs
+	{
+		background-position-y: -200px;
+	}
+
+
+	.enemy_zombie .enemy-sprite .map-enemy_40x40-head
+	{
+		background-position-y: -240px;
+	}
+
+	.enemy_zombie .enemy-sprite .map-enemy_40x40-hand-L
+	{
+		background-position-y: -280px;
+	}
+
+	.enemy_zombie .enemy-sprite .map-enemy_40x40-hand-R
+	{
+		background-position-y: -280px;
+	}
+
+	.enemy_zombie .enemy-sprite .map-enemy_40x40-body
+	{
+		background-position-y: -240px;
+	}
+
+	.enemy_zombie .enemy-sprite .map-enemy_40x40-legs
+	{
+		background-position-y: -320px;
+	}
+
+
+	.map-enemy_40x40_head_default
+	{
+		background-position-x: 0;
+	}
+
+	.map-enemy_40x40_head_happy
+	{
+		background-position-x: -40px;
+	}
+
+	.map-enemy_40x40_head_dead
+	{
+		background-position-x: -80px;
+	}
+
+	.map-enemy_40x40_head_fear
+	{
+		background-position-x: -120px;
+	}
+
+	/* GRAVE */
+
+	.enemy_grave40x40
+	{
+		width: 40px;
+		height: 40px;
+
+		position: absolute;
+
+		z-index: 0;
+	}
+
+	.enemy_grave_sprite
+	{
+		width: inherit;
+		height: inherit;
+
+		position: relative;
+	}
+
+	.enemy_grave40x40 .enemy_grave_sprite
+	{
+		background-position: -280px 0;
+	}
+
+/* ----------------------------------------------------------------------- ENEMY */
+
+/* ----------------------------------------------------------------------- PORTAL */
+
+	.portal
+	{
+		width: 80px;
+		height: 80px;
+
+		position: absolute;
+	}
+
+/*
+	.portal div
+	{
+		-webkit-backface-visibility	: hidden;
+		backface-visibility			: hidden;
+	}
+*/
+
+	.portal .portal_top
+	{
+		width: inherit;
+		height: inherit;
+
+		background-position: 0 0;
+
+		position: absolute;
+
+		z-index: 1;
+	}
+
+	.portal .portal_space
+	{
+		width: 70px;
+		height: 70px;
+
+		background: #ff0070;
+
+		position: absolute;
+
+		left: 5px;
+		top: 5px;
+
+		overflow: hidden;
+
+		z-index: 0;
+	}
+
+	.tween-portalStars
+	{
+		-webkit-animation	: tweenPortalStarsFrames 1s linear infinite;
+		animation			: tweenPortalStarsFrames 1s linear infinite;
+	}
+
+	@-webkit-keyframes tweenPortalStarsFrames
+	{
+		from 	{ -webkit-transform: translateX(0px); }
+		to		{ -webkit-transform: translateX(-80px); }
+	}
+
+	@keyframes tweenPortalStarsFrames
+	{
+		from 	{ transform: translateX(0px); }
+		to		{ transform: translateX(-80px); }
+	}
+
+	.portal .portal_stars0
+	{
+		width: 160px;
+		height: 80px;
+
+		position: absolute;
+
+		background-repeat: repeat-x;
+		background-position: 0 -80px;
+
+		-webkit-animation-duration: 2s;
+		animation-duration: 2s;
+
+		left: -5px;
+		top: -5px;
+
+		z-index: 2;
+	}
+
+	.portal .portal_stars1
+	{
+		width: 160px;
+		height: 80px;
+
+		position: absolute;
+
+		background-repeat: repeat-x;
+		background-position: 0 -160px;
+
+		-webkit-animation-duration: 4s;
+		animation-duration: 4s;
+
+		left: -5px;
+		top: -5px;
+
+		z-index: 1;
+	}
+
+	.portal .portal_stars2
+	{
+		width: 160px;
+		height: 80px;
+
+		position: absolute;
+
+		background-repeat: repeat-x;
+		background-position: 0 -240px;
+
+		-webkit-animation-duration: 6s;
+		animation-duration: 6s;
+
+		left: -5px;
+		top: -5px;
+
+		z-index: 0;
+	}
+
+/* ----------------------------------------------------------------------- PORTAL */
+
+
+

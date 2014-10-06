@@ -1,5 +1,7 @@
 var stage;
 
+var screen_multiInfoUse;
+
 function init()
 {
 	document.addEventListener("DOMContentLoaded", allLoaded, false);
@@ -11,144 +13,235 @@ function allLoaded(event)
 
 	stage = {};
 
-	stage.startScreenEntrance = document.querySelector(".startScreen_cont_entrance");
+	stage.multiUseInfoScreen = {};
 
-	stage.startScreenEntance_tl_line0 = document.querySelector(".startScreen_entranceLine0");
-	stage.startScreenEntance_tl_line1 = document.querySelector(".startScreen_entranceLine1");
 
-	stage.startScreenEntrance_soundTrue = document.querySelector(".startScreen_soundOption_true");
-	stage.startScreenEntrance_soundFalse = document.querySelector(".startScreen_soundOption_false");
-
-	var delay_test = setTimeout(entranceScreen_soundOptionsDrop, 1000);
+	var delay_test = setTimeout(libInit, 1000, "SOUND_GLOBAL");
 }
 
-function entranceScreen_soundOptionsDrop()
+function libInit(screenType)
 {
-	stage.startScreenEntrance.addEventListener("webkitTransitionEnd", entranceScreen_soundOptionsDrop_step0, false);
-	stage.startScreenEntrance.addEventListener("transitionend", entranceScreen_soundOptionsDrop_step0, false);
+	stage.multiUseInfoScreen.screenDefaults = {};
 
-	stage.startScreenEntrance.classList.remove("startScreen_cont_hide");
-	stage.startScreenEntrance.classList.add("startScreen_cont_show");
+	stage.multiUseInfoScreen.screenDefaults.screen = document.querySelector(".multiUseInfo_cont_entrance");
+
+	stage.multiUseInfoScreen.screenDefaults.title_line0 = document.querySelector(".multiUseInfo_entranceLine0");
+	stage.multiUseInfoScreen.screenDefaults.title_line1 = document.querySelector(".multiUseInfo_entranceLine1");
+
+	switch(screenType)
+	{
+		case "SOUND_GLOBAL":
+		{
+			stage.multiUseInfoScreen.soundMainOptions = {};
+
+			stage.multiUseInfoScreen.soundMainOptions.soundTrue = document.querySelector(".multiUseInfo_sound_option_true");
+			stage.multiUseInfoScreen.soundMainOptions.soundFalse = document.querySelector(".multiUseInfo_sound_option_false");
+
+			break;
+		}
+
+		case "BATTLE_FAIL":
+		{
+			stage.multiUseInfoScreen.gameFailScreen = {};
+
+			stage.multiUseInfoScreen.gameFailScreen.zombie = document.querySelector(".multiUseInfo_fail .multiUseInfo_fail_character");
+			stage.multiUseInfoScreen.gameFailScreen.zombieLegs = document.querySelector(".multiUseInfo_fail .map-enemy_40x40-legs");
+			stage.multiUseInfoScreen.gameFailScreen.zombieHead = document.querySelector(".multiUseInfo_fail .map-enemy_40x40-head");
+
+			break;
+		}
+	}
+
+	multiUseInfoScreen_drop(screenType);
 }
 
-function entranceScreen_soundOptionsDrop_step0(event)
+function multiUseInfoScreen_drop(screenType)
 {
-	stage.startScreenEntrance.removeEventListener("webkitTransitionEnd", entranceScreen_soundOptionsDrop_step0, false);
-	stage.startScreenEntrance.removeEventListener("transitionend", entranceScreen_soundOptionsDrop_step0, false);
+	screen_multiInfoUse = {};
+	screen_multiInfoUse.infoDisplay = screenType;
 
-	stage.startScreenEntance_tl_line0.classList.remove("startScreen_tl_hide");
-	stage.startScreenEntance_tl_line0.classList.add("startScreen_tl_show");
+	stage.multiUseInfoScreen.screenDefaults.screen.addEventListener("webkitTransitionEnd", multiUseInfoScreen_dropEnd, false);
+	stage.multiUseInfoScreen.screenDefaults.screen.addEventListener("transitionend", multiUseInfoScreen_dropEnd, false);
 
-	stage.startScreenEntance_tl_line1.classList.remove("startScreen_tl_hide");
-	stage.startScreenEntance_tl_line1.classList.add("startScreen_tl_show");
-
-	stage.startScreenEntance_tl_line1.addEventListener("webkitTransitionEnd", entranceScreen_soundOptionsDrop_step1, false);
-	stage.startScreenEntance_tl_line1.addEventListener("transitionend", entranceScreen_soundOptionsDrop_step1, false);
+	stage.multiUseInfoScreen.screenDefaults.screen.classList.remove("multiUseInfo_cont_hide");
+	stage.multiUseInfoScreen.screenDefaults.screen.classList.add("multiUseInfo_cont_show");
 }
 
-function entranceScreen_soundOptionsDrop_step1(event)
+function multiUseInfoScreen_dropEnd(event)
 {
-	stage.startScreenEntance_tl_line1.removeEventListener("webkitTransitionEnd", entranceScreen_soundOptionsDrop_step1, false);
-	stage.startScreenEntance_tl_line1.removeEventListener("transitionend", entranceScreen_soundOptionsDrop_step1, false);
+	var endFunct;
 
-	stage.startScreenEntrance_soundFalse.addEventListener("webkitTransitionEnd", entranceScreen_soundOptionsDrop_step2, false);
-	stage.startScreenEntrance_soundFalse.addEventListener("transitionend", entranceScreen_soundOptionsDrop_step2, false);
+	stage.multiUseInfoScreen.screenDefaults.screen.removeEventListener("webkitTransitionEnd", multiUseInfoScreen_dropEnd, false);
+	stage.multiUseInfoScreen.screenDefaults.screen.removeEventListener("transitionend", multiUseInfoScreen_dropEnd, false);
 
-	stage.startScreenEntance_tl_line1.classList.remove("startScreen_tl_delay");
+	stage.multiUseInfoScreen.screenDefaults.title_line0.classList.remove("multiUseInfo_tl_hide");
+	stage.multiUseInfoScreen.screenDefaults.title_line0.classList.add("multiUseInfo_tl_show");
 
+	stage.multiUseInfoScreen.screenDefaults.title_line1.classList.remove("multiUseInfo_tl_hide");
+	stage.multiUseInfoScreen.screenDefaults.title_line1.classList.add("multiUseInfo_tl_show");
 
-	stage.startScreenEntrance_soundTrue.classList.remove("startScreen_soundOption_hide");
-	stage.startScreenEntrance_soundTrue.classList.add("startScreen_soundOption_show");
+	switch(screen_multiInfoUse.infoDisplay)
+	{
+		case "SOUND_GLOBAL":
+		{
+			endFunct = soundGlobalOptions_display;
 
-	stage.startScreenEntrance_soundFalse.classList.remove("startScreen_soundOption_hide");
-	stage.startScreenEntrance_soundFalse.classList.add("startScreen_soundOption_show");
+			break;
+		}
+
+		case "BATTLE_FAIL":
+		{
+			endFunct = battleFail_display;
+
+			break;
+		}
+
+		default:
+		{
+			endFunct = null;
+		}
+	}
+
+	stage.multiUseInfoScreen.screenDefaults.title_line1.addEventListener("webkitTransitionEnd", endFunct, false);
+	stage.multiUseInfoScreen.screenDefaults.title_line1.addEventListener("transitionend", endFunct, false);
 }
 
-function entranceScreen_soundOptionsDrop_step2(event)
+// -------- GLOBAL_SOUND
+
+function soundGlobalOptions_display(event)
 {
-	stage.startScreenEntrance_soundTrue.removeEventListener("webkitTransitionEnd", entranceScreen_soundOptionsDrop_step2, false);
-	stage.startScreenEntrance_soundFalse.removeEventListener("transitionend", entranceScreen_soundOptionsDrop_step2, false);
+	stage.multiUseInfoScreen.screenDefaults.title_line1.removeEventListener("webkitTransitionEnd", soundGlobalOptions_display, false);
+	stage.multiUseInfoScreen.screenDefaults.title_line1.removeEventListener("transitionend", soundGlobalOptions_display, false);
 
-	stage.startScreenEntrance_soundFalse.classList.remove("startScreen_br_delay");
+	stage.multiUseInfoScreen.soundMainOptions.soundFalse.addEventListener("webkitTransitionEnd", soundGlobalOptions_displayEnd, false);
+	stage.multiUseInfoScreen.soundMainOptions.soundFalse.addEventListener("transitionend", soundGlobalOptions_displayEnd, false);
 
-	entranceScreen_soundBtnsInit(true);
+	stage.multiUseInfoScreen.screenDefaults.title_line1.classList.remove("tween-multiUseInfo_cont_entrance_tl_delay");
+
+
+	stage.multiUseInfoScreen.soundMainOptions.soundTrue.classList.remove("multiUseInfo_sound_option_hide");
+	stage.multiUseInfoScreen.soundMainOptions.soundTrue.classList.add("multiUseInfo_sound_option_show");
+
+	stage.multiUseInfoScreen.soundMainOptions.soundFalse.classList.remove("multiUseInfo_sound_option_hide");
+	stage.multiUseInfoScreen.soundMainOptions.soundFalse.classList.add("multiUseInfo_sound_option_show");
 }
 
-function entranceScreen_soundBtnsInit(run)
+function soundGlobalOptions_displayEnd(event)
+{
+	stage.multiUseInfoScreen.soundMainOptions.soundTrue.removeEventListener("webkitTransitionEnd", soundGlobalOptions_displayEnd, false);
+	stage.multiUseInfoScreen.soundMainOptions.soundFalse.removeEventListener("transitionend", soundGlobalOptions_displayEnd, false);
+
+	stage.multiUseInfoScreen.soundMainOptions.soundFalse.classList.remove("tween-multiUseInfo_sound_option_delay");
+
+	soundGlobalOptions_btnInit(true);
+}
+
+function soundGlobalOptions_btnInit(run)
 {
 	if(run)
 	{
-		stage.startScreenEntrance_soundTrue.addEventListener("click", entranceScreen_soundBtnsEvent, false);
-		stage.startScreenEntrance_soundFalse.addEventListener("click", entranceScreen_soundBtnsEvent, false);
+		stage.multiUseInfoScreen.soundMainOptions.soundTrue.addEventListener("click", soundGlobalOptions_btnEvent, false);
+		stage.multiUseInfoScreen.soundMainOptions.soundFalse.addEventListener("click", soundGlobalOptions_btnEvent, false);
 
-		stage.startScreenEntrance_soundTrue.addEventListener("touchend", entranceScreen_soundBtnsEvent, false);
-		stage.startScreenEntrance_soundFalse.addEventListener("touchend", entranceScreen_soundBtnsEvent, false);
+		stage.multiUseInfoScreen.soundMainOptions.soundTrue.addEventListener("touchend", soundGlobalOptions_btnEvent, false);
+		stage.multiUseInfoScreen.soundMainOptions.soundFalse.addEventListener("touchend", soundGlobalOptions_btnEvent, false);
 	}
 
 	else
 	{
-		stage.startScreenEntrance_soundTrue.removeEventListener("click", entranceScreen_soundBtnsEvent, false);
-		stage.startScreenEntrance_soundFalse.removeEventListener("click", entranceScreen_soundBtnsEvent, false);
+		stage.multiUseInfoScreen.soundMainOptions.soundTrue.removeEventListener("click", soundGlobalOptions_btnEvent, false);
+		stage.multiUseInfoScreen.soundMainOptions.soundFalse.removeEventListener("click", soundGlobalOptions_btnEvent, false);
 
-		stage.startScreenEntrance_soundTrue.removeEventListener("touchend", entranceScreen_soundBtnsEvent, false);
-		stage.startScreenEntrance_soundFalse.removeEventListener("touchend", entranceScreen_soundBtnsEvent, false);
+		stage.multiUseInfoScreen.soundMainOptions.soundTrue.removeEventListener("touchend", soundGlobalOptions_btnEvent, false);
+		stage.multiUseInfoScreen.soundMainOptions.soundFalse.removeEventListener("touchend", soundGlobalOptions_btnEvent, false);
 
-		stage.startScreenEntrance_soundTrue.classList.add("startScreen_optionDisabled");
-		stage.startScreenEntrance_soundFalse.classList.add("startScreen_optionDisabled");
+		stage.multiUseInfoScreen.soundMainOptions.soundTrue.classList.add("multiUseInfo_option_disabled");
+		stage.multiUseInfoScreen.soundMainOptions.soundFalse.classList.add("multiUseInfo_option_disabled");
 	}
 }
 
-function entranceScreen_soundBtnsEvent(event)
+function soundGlobalOptions_btnEvent(event)
 {
 
-	entranceScreen_soundBtnsInit(false);
+	soundGlobalOptions_btnInit(false);
 
 	for(var c = 0; c < event.target.classList.length; c++)
 	{
 		var cl = event.target.classList[c];
 
-		if(cl === "startScreen_soundOption_true" || cl === "startScreen_soundOption_false")
+		if(cl === "multiUseInfo_sound_option_true" || cl === "multiUseInfo_sound_option_false")
 		{
-			if(cl === "startScreen_soundOption_true")
+			if(cl === "multiUseInfo_sound_option_true")
 			{
-				stage.startScreenEntrance_soundFalse.classList.remove("startScreen_soundOption_show");
-				stage.startScreenEntrance_soundFalse.classList.add("startScreen_soundOption_hide");
+				stage.multiUseInfoScreen.soundMainOptions.soundFalse.classList.remove("multiUseInfo_sound_option_show");
+				stage.multiUseInfoScreen.soundMainOptions.soundFalse.classList.add("multiUseInfo_sound_option_hide");
 			}
 
-			if(cl === "startScreen_soundOption_false")
+			if(cl === "multiUseInfo_sound_option_false")
 			{
-				stage.startScreenEntrance_soundTrue.classList.remove("startScreen_soundOption_show");
-				stage.startScreenEntrance_soundTrue.classList.add("startScreen_soundOption_hide");
+				stage.multiUseInfoScreen.soundMainOptions.soundTrue.classList.remove("multiUseInfo_sound_option_show");
+				stage.multiUseInfoScreen.soundMainOptions.soundTrue.classList.add("multiUseInfo_sound_option_hide");
 			}
 		}
 	}
 
-	entranceScreen_soundOptionsRemoveTitle();
+	multiUseInfoScreen_removeTitle();
 }
 
-function entranceScreen_soundOptionsRemoveTitle()
+// -------- GLOBAL_SOUND
+
+// -------- BATTLE_FAIL
+
+function battleFail_display()
 {
-	stage.startScreenEntance_tl_line0.classList.add("startScreen_tl_delay");
+	stage.multiUseInfoScreen.screenDefaults.title_line1.removeEventListener("webkitTransitionEnd", battleFail_display, false);
+	stage.multiUseInfoScreen.screenDefaults.title_line1.removeEventListener("transitionend", battleFail_display, false);
 
-	stage.startScreenEntance_tl_line0.classList.remove("startScreen_tl_show");
-	stage.startScreenEntance_tl_line0.classList.add("startScreen_tl_hide");
+	stage.multiUseInfoScreen.gameFailScreen.zombie.addEventListener("webkitTransitionEnd", battleFail_displayEnd, false);
+	stage.multiUseInfoScreen.gameFailScreen.zombie.addEventListener("transitionend", battleFail_displayEnd, false);
 
-	stage.startScreenEntance_tl_line1.classList.remove("startScreen_tl_show");
-	stage.startScreenEntance_tl_line1.classList.add("startScreen_tl_hide");
+	stage.multiUseInfoScreen.gameFailScreen.zombieLegs.classList.remove("tween-map-enemy_40x40_stop");
+	stage.multiUseInfoScreen.gameFailScreen.zombieLegs.classList.add("tween-map-enemy_40x40_loop");
 
-	stage.startScreenEntance_tl_line0.addEventListener("webkitTransitionEnd", entranceScreen_soundOptionsRise, false);
-
-	stage.startScreenEntance_tl_line0.addEventListener("transitionend", entranceScreen_soundOptionsRise, false);
+	stage.multiUseInfoScreen.gameFailScreen.zombie.classList.remove("multiUseInfo_fail_character_hide");
+	stage.multiUseInfoScreen.gameFailScreen.zombie.classList.add("multiUseInfo_fail_character_show");
 }
 
-function entranceScreen_soundOptionsRise(event)
+function battleFail_displayEnd(event)
 {
-	stage.startScreenEntance_tl_line0.removeEventListener("webkitTransitionEnd", entranceScreen_soundOptionsRise, false);
+	stage.multiUseInfoScreen.gameFailScreen.zombie.removeEventListener("webkitTransitionEnd", battleFail_displayEnd, false);
+	stage.multiUseInfoScreen.gameFailScreen.zombie.removeEventListener("transitionend", battleFail_displayEnd, false);
 
-	stage.startScreenEntance_tl_line0.removeEventListener("transitionend", entranceScreen_soundOptionsRise, false);
+	stage.multiUseInfoScreen.gameFailScreen.zombieHead.classList.add("map-enemy_40x40_head_fear");
 
-	stage.startScreenEntrance.classList.remove("startScreen_cont_show");
-	stage.startScreenEntrance.classList.add("startScreen_cont_hide");
+	// TRIGGER TIMER
+}
+
+// -------- BATTLE_FAIL
+
+function multiUseInfoScreen_removeTitle()
+{
+	stage.multiUseInfoScreen.screenDefaults.title_line0.classList.add("tween-multiUseInfo_cont_entrance_tl_delay");
+
+	stage.multiUseInfoScreen.screenDefaults.title_line0.classList.remove("multiUseInfo_tl_show");
+	stage.multiUseInfoScreen.screenDefaults.title_line0.classList.add("multiUseInfo_tl_hide");
+
+	stage.multiUseInfoScreen.screenDefaults.title_line1.classList.remove("multiUseInfo_tl_show");
+	stage.multiUseInfoScreen.screenDefaults.title_line1.classList.add("multiUseInfo_tl_hide");
+
+	stage.multiUseInfoScreen.screenDefaults.title_line0.addEventListener("webkitTransitionEnd", multiUseInfoScreen_rise, false);
+
+	stage.multiUseInfoScreen.screenDefaults.title_line0.addEventListener("transitionend", multiUseInfoScreen_rise, false);
+}
+
+function multiUseInfoScreen_rise(event)
+{
+	stage.multiUseInfoScreen.screenDefaults.title_line0.removeEventListener("webkitTransitionEnd", multiUseInfoScreen_rise, false);
+
+	stage.multiUseInfoScreen.screenDefaults.title_line0.removeEventListener("transitionend", multiUseInfoScreen_rise, false);
+
+	stage.multiUseInfoScreen.screenDefaults.screen.classList.remove("multiUseInfo_cont_show");
+	stage.multiUseInfoScreen.screenDefaults.screen.classList.add("multiUseInfo_cont_hide");
 }
 
 init();
